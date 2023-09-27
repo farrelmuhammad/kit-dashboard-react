@@ -12,10 +12,7 @@ import { auth, googleProvider } from "../helpers/config/firebase";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loginSuccess } from "../helpers/redux/actions/authActions";
-import {
-  googleSignInFailure,
-  googleSignInSuccess,
-} from "../helpers/redux/actions/googleAuthActions";
+import { googleSignInFailure, googleSignInSuccess } from "../helpers/redux/actions/googleAuthActions";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -44,11 +41,13 @@ const Login = () => {
       // console.log(result);
       showToast("Welcome back " + result.user.displayName + "!!!");
 
+
       dispatch(googleSignInSuccess(result.user));
       navigate("/dashboard");
     } catch (error) {
       dispatch(googleSignInFailure(error));
       showToast(error.message);
+
     }
   };
 
@@ -97,7 +96,6 @@ const Login = () => {
         const user = userCredential.user;
         dispatch(loginSuccess(user));
         showToast("Welcome back " + user.displayName + "!!!");
-        navigate("/dashboard");
 
         // navigate("/home");
         // console.log(user);

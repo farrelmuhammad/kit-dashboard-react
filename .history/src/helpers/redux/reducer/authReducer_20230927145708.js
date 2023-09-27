@@ -6,12 +6,6 @@ const initialState = {
 
 const authReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'REGISTER_SUCCESS':
-            return {
-                ...state,
-                isAuthenticated: true, // Bisa juga diganti menjadi true setelah registrasi berhasil.
-                user: action.payload, // Simpan data pengguna jika diperlukan.
-            };
         case 'LOGIN_SUCCESS':
             return {
                 ...state,

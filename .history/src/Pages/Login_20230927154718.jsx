@@ -97,7 +97,6 @@ const Login = () => {
         const user = userCredential.user;
         dispatch(loginSuccess(user));
         showToast("Welcome back " + user.displayName + "!!!");
-        navigate("/dashboard");
 
         // navigate("/home");
         // console.log(user);

@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Register from './pages/Register';
 import Dashoard from './pages/Dashoard';
-import Login from './pages/Login';
+import Login from './Pages/Login';
 
 function App() {
   return (
