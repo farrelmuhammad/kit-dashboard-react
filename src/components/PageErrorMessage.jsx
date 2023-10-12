@@ -21,7 +21,7 @@ const PageErrorMessage = ({
                                 to="/"
                                 className="text-white bg-gray-800 hover:bg-gray-700 focus:outline-none w-full py-3 rounded-full text-lg focus:text-white transition-all duration-200 px-8 cursor-pointer"
                             >
-                                Back to Shop
+                                Back Home
                             </Link>
                         </div>
                     </div>

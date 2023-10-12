@@ -3,11 +3,12 @@ import PageErrorMessage from '../components/PageErrorMessage'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 
-const Notfound = () => {
+const Notfound = ({ title, body }) => {
+    console.log(title, body)
     return (
         <>
             <Navbar />
-            <PageErrorMessage />
+            <PageErrorMessage title={title} body={body} />
             <Footer />
         </>
     )

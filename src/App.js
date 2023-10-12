@@ -22,7 +22,7 @@ function App() {
           </>
         ) : (
           <>
-            <Route exact path="*" element={<Notfound />} />
+            <Route exact path="*" element={<Notfound title="401 Unauthorized" body="Access Not Allowed: Please log in or register with an account that has access permissions." />} />
           </>
         )}
       </Routes>
