@@ -1,9 +1,17 @@
 import React, { useState } from "react";
 import { FiShoppingCart } from "react-icons/fi";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { clearData } from "../helpers/redux/slices/authSlice";
 
 const Navbar = ({ isLoggedIn }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const logOut = () => {
+    dispatch(clearData(isLoggedIn));
+    navigate("/login");
+  }
   return (
     <>
       <nav className="bg-gray-800">
@@ -100,14 +108,15 @@ const Navbar = ({ isLoggedIn }) => {
                 </button>
                 <div className="relative ml-3">
                   <div className="flex space-x-2 justify-center">
-                    <Link to="/login"
+                    <button
                       type="button"
+                      onClick={logOut}
                       data-mdb-ripple="true"
                       data-mdb-ripple-color="light"
                       className="inline-block px-6 py-2.5 bg-red-500 text-white font-extrabold tracking-wide text-xs leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out"
                     >
                       Logout
-                    </Link>
+                    </button>
                   </div>
                 </div>
               </div>
