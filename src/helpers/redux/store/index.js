@@ -1,6 +1,7 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
 import authReducers from "../slices/authSlice";
+import toastReducers from "../slices/toastSlice";
 
 import storage from "redux-persist/lib/storage";
 import persistReducer from "redux-persist/es/persistReducer";
@@ -21,7 +22,7 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(
   persistConfig,
-  combineReducers({ auth: authReducers })
+  combineReducers({ auth: authReducers, toast: toastReducers })
 );
 
 export const store = configureStore({
