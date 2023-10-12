@@ -1,8 +1,11 @@
-import React from 'react'
+import React from 'react';
+import Navbar from "../components/Navbar";
 
 const Dashoard = () => {
   return (
-    <div>Dashoard</div>
+    <>
+      <Navbar />
+    </>
   )
 }
 

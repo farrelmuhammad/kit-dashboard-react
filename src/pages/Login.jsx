@@ -11,12 +11,7 @@ import {
 import { auth, googleProvider } from "../helpers/config/firebase";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loginSuccess } from "../helpers/redux/actions/authActions";
-import {
-  googleSignInFailure,
-  googleSignInSuccess,
-} from "../helpers/redux/actions/googleAuthActions";
-
+import { setData } from "../helpers/redux/slices/authSlice";
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -33,21 +28,20 @@ const Login = () => {
   // console.log(auth?.currentUser?.email);
   const dispatch = useDispatch(); // Ambil useDispatch dari React Redux
 
-  // Gunakan useSelector untuk mengakses state auth
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-
-  const googleAuth = useSelector((state) => state.googleAuth); // Ambil state Google authentication
 
   const signInWithGoogle = async () => {
     try {
       const result = await signInWithPopup(auth, new GoogleAuthProvider());
-      // console.log(result);
+      // console.log(result.user);
+      dispatch(setData({
+        user: result.user.displayName,
+        accessToken: result.user.accessToken
+      }));
+
       showToast("Welcome back " + result.user.displayName + "!!!");
 
-      dispatch(googleSignInSuccess(result.user));
       navigate("/dashboard");
     } catch (error) {
-      dispatch(googleSignInFailure(error));
       showToast(error.message);
     }
   };
@@ -95,7 +89,14 @@ const Login = () => {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        dispatch(loginSuccess(user));
+        dispatch(setData({
+          user: user.displayName,
+          accessToken: user.accessToken
+        }));
+        console.log(user)
+        // dispatch(setData(
+
+        // ))
         showToast("Welcome back " + user.displayName + "!!!");
         navigate("/dashboard");
 

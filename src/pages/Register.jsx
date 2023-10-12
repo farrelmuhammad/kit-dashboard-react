@@ -5,7 +5,6 @@ import { auth } from "../helpers/config/firebase";
 import { FiLoader, FiEye, FiEyeOff } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { registerSuccess } from "../helpers/redux/actions/authActions";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -75,7 +74,7 @@ const Register = () => {
 
       await updateProfile(auth.currentUser, { displayName: formData.fullname });
       const userData = { email: formData.email, fullname: formData.fullname };
-      dispatch(registerSuccess(userData));
+      // dispatch(registerSuccess(userData));
 
       showToast("Register successful");
     } catch (err) {

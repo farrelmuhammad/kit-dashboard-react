@@ -1,13 +1,36 @@
-// store.js
-import { createStore, combineReducers } from 'redux';
-import authReducer from '../reducer/authReducer';
-import googleAuthReducer from '../reducer/googleAuthReducer';
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
-const rootReducer = combineReducers({
-    auth: authReducer,
-    googleAuth: googleAuthReducer
+import authReducers from "../slices/authSlice";
+
+import storage from "redux-persist/lib/storage";
+import persistReducer from "redux-persist/es/persistReducer";
+import {
+  FLUSH,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+  REHYDRATE,
+} from "redux-persist";
+
+const persistConfig = {
+  key: "root",
+  version: 1,
+  storage,
+};
+
+const persistedReducer = persistReducer(
+  persistConfig,
+  combineReducers({ auth: authReducers })
+);
+
+export const store = configureStore({
+  reducer: persistedReducer,
+
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 });
-
-const store = createStore(rootReducer);
-
-export default store;
