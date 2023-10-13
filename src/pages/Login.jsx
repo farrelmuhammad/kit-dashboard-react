@@ -12,6 +12,7 @@ import { auth, googleProvider } from "../helpers/config/firebase";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setData } from "../helpers/redux/slices/authSlice";
+import { toast } from "react-toastify";
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -38,7 +39,15 @@ const Login = () => {
         accessToken: result.user.accessToken
       }));
 
-      showToast("Welcome back " + result.user.displayName + "!!!");
+      toast.success("Welcome back " + result.user.displayName + "!!!", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
 
       navigate("/dashboard");
     } catch (error) {
@@ -75,12 +84,28 @@ const Login = () => {
     e.preventDefault();
 
     if (!isValidEmail(formData.email)) {
-      showToast("Email tidak valid");
+      toast.error("Email tidak valid", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       return;
     }
 
     if (formData.password.length < 6) {
-      showToast("Password harus memiliki setidaknya 6 karakter");
+      toast.error("Password harus memiliki setidaknya 6 karakter", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       return;
     }
 
@@ -97,7 +122,15 @@ const Login = () => {
         // dispatch(setData(
 
         // ))
-        showToast("Welcome back " + user.displayName + "!!!");
+        toast.success("Welcome back " + user.displayName + "!!!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
         navigate("/dashboard");
 
         // navigate("/home");
@@ -106,7 +139,15 @@ const Login = () => {
       .catch((error) => {
         // const errorCode = error.code;
         const errorMessage = error.message;
-        showToast(errorMessage);
+        toast.error(errorMessage, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       });
 
     setIsLoading(false);
@@ -193,15 +234,13 @@ const Login = () => {
                   />
                   <FiEye
                     onClick={() => setShowPassword(true)}
-                    className={`${
-                      showPassword ? "hidden" : ""
-                    } absolute right-3 top-2.5 text-neutral-3`}
+                    className={`${showPassword ? "hidden" : ""
+                      } absolute right-3 top-2.5 text-neutral-3`}
                   />
                   <FiEyeOff
                     onClick={() => setShowPassword(false)}
-                    className={`${
-                      showPassword ? "" : "hidden"
-                    } absolute right-3 top-2.5 text-neutral-3`}
+                    className={`${showPassword ? "" : "hidden"
+                      } absolute right-3 top-2.5 text-neutral-3`}
                   />
                   <div className="flex items-center gap-2">
                     <div className="flex items-center gap-2">
@@ -254,11 +293,11 @@ const Login = () => {
                 </Link>
               </div>
 
-              <div className="text-center text-sm">
+              {/* <div className="text-center text-sm">
                 <p>Or, login with</p>
-              </div>
+              </div> */}
               <div className="flex items-center justify-between gap-2 pt-2">
-                <button
+                {/* <button
                   className="flex justify-center items-center border border-indigo-300 px-6 py-2 text-indigo-400 font-normal text-sm leading-tight rounded-lg
     focus:shadow-lg focus:outline-none active:shadow-lg w-1/2 disabled:opacity-70 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300"
                   type="button"
@@ -313,10 +352,10 @@ const Login = () => {
                     ></path>
                   </svg>
                   <span className="pl-1">Linkedin</span>
-                </button>
+                </button> */}
                 <button
-                  className="flex justify-center items-center border border-indigo-300 px-6 py-2 text-indigo-400 font-normal text-sm leading-tight rounded-lg
-    focus:shadow-lg focus:outline-none active:shadow-lg w-1/2 disabled:opacity-70 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300"
+                  className="flex justify-center items-center w-full h-10 border border-indigo-300 px-6 py-2 text-indigo-400 font-normal text-sm leading-tight rounded-lg
+    focus:shadow-lg focus:outline-none active:shadow-lg disabled:opacity-70 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300"
                   type="button"
                   onClick={signInWithGoogle}
                 >
@@ -345,7 +384,7 @@ const Login = () => {
                       d="M43.611,20.083L43.595,20L42,20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571	c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"
                     ></path>
                   </svg>
-                  <span className="pl-1">Google</span>
+                  <span className="pl-1">Login with Google</span>
                 </button>
               </div>
             </form>
