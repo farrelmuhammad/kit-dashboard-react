@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import { useSelector } from 'react-redux';
 import Sidebar from '../components/Sidebar';
 import Header from '../components/Header';
+import DataTable from '../components/Backoffice/DataTable';
 
 const Dashoard = () => {
   const isLoggedIn = useSelector(state => state.auth.accessToken);
@@ -21,8 +22,10 @@ const Dashoard = () => {
           <div className="px-6 py-4">
             <Header isLoggedIn={isLoggedIn} />
           </div>
-          <div className="px-6 py-4 bg-red-200">
-            <div className=''>a</div>
+          <div className="px-6 py-4">
+            <div className='bg-gray-200 p-2 rounded-lg'>
+              <DataTable />
+            </div>
           </div>
         </div>
       </div>
