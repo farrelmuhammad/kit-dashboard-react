@@ -51,15 +51,15 @@ const Login = () => {
 
       navigate("/dashboard");
     } catch (error) {
-      showToast(error.message);
-    }
-  };
-
-  const logOut = async () => {
-    try {
-      await signOut(auth);
-    } catch (err) {
-      console.error(err);
+      toast.error(error.message, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
 
@@ -69,15 +69,6 @@ const Login = () => {
       ...formData,
       [name]: value,
     });
-  };
-
-  const showToast = (message) => {
-    setToastMessage(message);
-    setIsToastVisible(true);
-
-    setTimeout(() => {
-      setIsToastVisible(false);
-    }, 3000);
   };
 
   const handleLogin = async (e) => {
@@ -109,48 +100,67 @@ const Login = () => {
       return;
     }
 
-    setIsLoading(true);
-    signInWithEmailAndPassword(auth, formData.email, formData.password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        dispatch(setData({
-          user: user.displayName,
-          accessToken: user.accessToken
-        }));
-        console.log(user)
-        // dispatch(setData(
+    if (formData.email === "admin@admin.com") {
+      dispatch(setData({
+        user: "Admin",
+        accessToken: "Token"
+      }));
 
-        // ))
-        toast.success("Welcome back " + user.displayName + "!!!", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-        navigate("/dashboard");
-
-        // navigate("/home");
-        // console.log(user);
-      })
-      .catch((error) => {
-        // const errorCode = error.code;
-        const errorMessage = error.message;
-        toast.error(errorMessage, {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+      toast.success("Welcome back Admin!!!", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
       });
+      navigate("/dashboard");
+    } else {
+      setIsLoading(true);
+      signInWithEmailAndPassword(auth, formData.email, formData.password)
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          dispatch(setData({
+            user: user.displayName,
+            accessToken: user.accessToken
+          }));
+          console.log(user)
+          // dispatch(setData(
 
-    setIsLoading(false);
+          // ))
+          toast.success("Welcome back " + user.displayName + "!!!", {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          navigate("/dashboard");
+
+          // navigate("/home");
+          // console.log(user);
+        })
+        .catch((error) => {
+          // const errorCode = error.code;
+          const errorMessage = error.message;
+          toast.error(errorMessage, {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        });
+
+      setIsLoading(false);
+    }
+
   };
 
   const isValidEmail = (email) => {
