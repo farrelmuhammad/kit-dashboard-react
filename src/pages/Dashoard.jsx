@@ -138,14 +138,14 @@ const Dashoard = () => {
 
             <div className="flex gap-3">
               <div className="w-2/3">
-                <Chart text="Data Lainnya" />
+                <Chart text="Penjualan Produk" />
               </div>
               <div className="w-1/3">
-                <PieChart text="Data Lainnya" />
+                <PieChart text="Jenis Produk" />
               </div>
             </div>
             <div className='w-full border border-spacing-1 p-2 rounded-lg my-4'>
-              <h2 className='text-gray-800 text-2xl text-start px-2 py-1'>Tabel Karyawan</h2>
+              <h2 className='text-gray-800 text-2xl font-semibold text-start px-2 py-1'>Tabel Karyawan</h2>
               <DataTable columns={columns} data={data} pagination={tableParams} loading={loading} onChange={handleTableChange} />
             </div>
           </div>

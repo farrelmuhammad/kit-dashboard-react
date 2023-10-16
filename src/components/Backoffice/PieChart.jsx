@@ -39,7 +39,7 @@ const PieChart = ({
     return (
         <>
             <div id="chart" className={[`w-[${width}] h-[${height}] border border-spacing-1 p-2 rounded-lg my-4`]}>
-                <h2 className='text-gray-800 text-2xl text-start px-2 py-1'>{text}</h2>
+                <h2 className='text-gray-800 text-2xl font-semibold text-start px-2 py-1'>{text}</h2>
                 <ReactApexChart options={chartData.options} series={chartData.series} type="radialBar" height={height} />
             </div>
         </>
