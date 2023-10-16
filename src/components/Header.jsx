@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { FiBell, FiChevronDown, FiChevronUp, FiShoppingCart } from 'react-icons/fi'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
@@ -26,19 +26,37 @@ const Header = ({ isLoggedIn }) => {
     const handleDropdown = (type) => {
         if (type === 'profile') {
             setOpenDropdown(!openDropdown);
-            setOpenNotifications(false); // Tutup notifikasi jika membuka profil
+            setOpenNotifications(false);
         } else if (type === 'notifications') {
             setOpenNotifications(!openNotifications);
-            setOpenDropdown(false); // Tutup profil jika membuka notifikasi
+            setOpenDropdown(false);
         }
     }
 
+    const dropdownRef = useRef(null);
+
+    const closeDropdownOnOutsideClick = (event) => {
+        if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+            setOpenDropdown(false);
+            setOpenNotifications(false);
+        }
+    };
+
     useEffect(() => {
-    }, [])
+        if (openDropdown || openNotifications) {
+            document.addEventListener('click', closeDropdownOnOutsideClick);
+        } else {
+            document.removeEventListener('click', closeDropdownOnOutsideClick);
+        }
+
+        return () => {
+            document.removeEventListener('click', closeDropdownOnOutsideClick);
+        };
+    }, [openDropdown, openNotifications]);
 
     return (
         <>
-            <div className="relative flex h-16 items-center justify-between">
+            <div className="relative flex h-16 items-center justify-between" ref={dropdownRef}>
                 <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                     <span
                         className="flex flex-col text-gray-300 hover:underline rounded-md text-sm font-medium"
@@ -48,14 +66,14 @@ const Header = ({ isLoggedIn }) => {
                     </span>
                 </div>
                 {isLoggedIn ? <>
-                    <div className="relative gap-3 inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                    <div  className="relative gap-3 inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                         <button
                             type="button"
                             onClick={() => handleDropdown('notifications')}
                             className={["rounded-full bg-gray-100 text-gray-800 hover:text-orange-600 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"]}
                         >
                             <span className="sr-only">View notifications</span>
-                            
+
                             <FiBell className='text-lg font-bold' />
                         </button>
                         {openNotifications && (
