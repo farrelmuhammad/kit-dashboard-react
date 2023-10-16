@@ -74,6 +74,7 @@ const Sidebar = () => {
 
     const [toggle, setToggle] = useState(false);
     const [openDropdown, setOpenDropdown] = useState(null);
+    const [activeMenu, setActiveMenu] = useState("home");
 
     const toggleSidebar = () => {
         console.log("Toggling toggle");
@@ -90,9 +91,9 @@ const Sidebar = () => {
 
     return (
         <>
-            <aside className="w-full">
+            <aside class="fixed top-0 left-0 w-1/5 h-full">
                 <div className="overflow-y-auto py-4 px-3 shadow-lg shadow-gray-100/50 rounded-lg h-screen">
-                    <div className="flex flex-col items-center">
+                    <div className="flex flex-col items-center h-1/5">
                         <img
                             className="block h-20 w-auto lg:hidden"
                             src="https://bkdelivery.co.id/static/website/img/logo_2022.38d01a7c7dd3.png"
@@ -124,20 +125,27 @@ const Sidebar = () => {
                         </div>
                     </div> */}
 
-
-                    <ul className="p-2 mb-1 mt-8">
+                    <ul className="h-2/3">
                         {Object.keys(menu.menus).map((key, index) => (
                             <li key={index}>
                                 {menu.menus[key].children ? (
                                     // Render a dropdown if "children" exist
                                     <div>
                                         <span
-                                            className="flex items-center px-6 py-4 w-full text-base font-normal rounded-lg text-gray-500 cursor-pointer hover:bg-orange-500 hover:text-white"
-                                            onClick={() => handleDropdown(key)}
+                                            className={`flex items-center px-6 py-4 w-full text-base font-normal rounded-lg cursor-pointer hover:bg-orange-500 hover:text-white ${activeMenu === key ? "bg-orange-500 text-white" : "text-gray-500"
+                                                }`}
+                                            onClick={() => {
+                                                handleDropdown(key);
+                                                setActiveMenu(key);
+                                            }}
                                         >
                                             {menu.menus[key].icon}
                                             <span className="ml-3">{menu.menus[key].name}</span>
-                                            {openDropdown === key ? <FiChevronUp className='ml-auto' /> : <FiChevronDown className='ml-auto' />}
+                                            {openDropdown === key ? (
+                                                <FiChevronUp className="ml-auto" />
+                                            ) : (
+                                                <FiChevronDown className="ml-auto" />
+                                            )}
                                         </span>
                                         {openDropdown === key && (
                                             <ul className="pl-8">
@@ -145,7 +153,9 @@ const Sidebar = () => {
                                                     <li key={subIndex}>
                                                         <Link
                                                             to={menu.menus[key].children[subKey].path}
-                                                            className="flex items-center px-6 py-4 text-base font-normal rounded-lg text-gray-500 hover:bg-orange-500 hover:text-white"
+                                                            className={`flex items-center px-6 py-4 text-base font-normal rounded-lg cursor-pointer hover:bg-orange-500 hover:text-white ${activeMenu === subKey ? "bg-orange-500 text-white" : "text-gray-500"
+                                                                }`}
+                                                            onClick={() => setActiveMenu(subKey)}
                                                         >
                                                             <span className="ml-6">{menu.menus[key].children[subKey].name}</span>
                                                         </Link>
@@ -158,7 +168,9 @@ const Sidebar = () => {
                                     // Render a regular menu item
                                     <Link
                                         to={menu.menus[key].path}
-                                        className="flex items-center px-6 py-4 text-base font-normal rounded-lg text-gray-500 hover:bg-orange-500 hover:text-white"
+                                        className={`flex items-center px-6 py-4 text-base font-normal rounded-lg cursor-pointer hover:bg-orange-500 hover:text-white ${activeMenu === key ? "bg-orange-500 text-white" : "text-gray-500"
+                                            }`}
+                                        onClick={() => setActiveMenu(key)}
                                     >
                                         {menu.menus[key].icon}
                                         <span className="ml-3">{menu.menus[key].name}</span>
@@ -167,6 +179,9 @@ const Sidebar = () => {
                             </li>
                         ))}
                     </ul>
+                    <div className="h-5/5">
+                        asdads
+                    </div>
                 </div>
             </aside>
         </>

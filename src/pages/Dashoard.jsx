@@ -93,10 +93,6 @@ const Dashoard = () => {
 
   return (
     <>
-      {/* <Navbar isLoggedIn={isLoggedIn} />
-      <div className="flex p-10">
-        <Sidebar />
-      </div> */}
       <div className="flex h-screen">
         <div className="w-1/5">
           <Sidebar />
@@ -123,7 +119,7 @@ const Dashoard = () => {
                 <p className="text-2xl font-bold self-end">2</p>
               </div>
             </div>
-            
+
             <div className="flex gap-3">
               <div className="w-2/3">
                 <Chart text="Data Lainnya" />

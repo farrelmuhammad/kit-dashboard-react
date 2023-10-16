@@ -23,16 +23,22 @@ function App() {
         id: 1,
         title: "New Message",
         message: "You have a new message from John.",
+        lastMessageDate: "2023-09-16T15:45:00Z",
+        read: false,
       },
       {
         id: 2,
         title: "Friend Request",
         message: "You have a new friend request from Sarah.",
+        lastMessageDate: "2023-09-15T15:45:00Z",
+        read: false,
       },
       {
         id: 3,
         title: "Event Reminder",
         message: "Don't forget about the event tomorrow!",
+        lastMessageDate: "2023-09-14T15:45:00Z",
+        read: false,
       },
     ],
   };
