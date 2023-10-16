@@ -93,16 +93,11 @@ const Sidebar = () => {
         <>
             <aside class="fixed top-0 left-0 w-1/5 h-full">
                 <div className="overflow-y-auto py-4 px-3 shadow-lg shadow-gray-100/50 rounded-lg h-screen">
-                    <div className="flex flex-col items-center h-1/5">
-                        <img
-                            className="block h-20 w-auto lg:hidden"
-                            src="https://bkdelivery.co.id/static/website/img/logo_2022.38d01a7c7dd3.png"
-                            alt="Burger King Delivery"
-                        />
+                    <div className="flex justify-center py-2 h-1/5">
                         <Link to="/">
                             <img
-                                className="hidden drop-shadow-2xl h-20 w-auto lg:block"
-                                src="https://bkdelivery.co.id/static/website/img/logo_2022.38d01a7c7dd3.png"
+                                className="drop-shadow-2xl h-20 w-full rounded-xl  lg:block"
+                                src="https://images.squarespace-cdn.com/content/v1/63ddda469149b12c9c203af6/1675628199265-KEWZ4J18F595C7TURI8U/Krusty+Krab+Logo.jpg?format=1000w"
                                 alt="Burger King Delivery"
                             />
                         </Link>
@@ -179,9 +174,11 @@ const Sidebar = () => {
                             </li>
                         ))}
                     </ul>
-                    <div className="h-5/5">
-                        asdads
-                    </div>
+                    {/* <div className="flex justify-center mt-auto">
+                        <button className='p-2 m-2'>
+                            <FiMenu />
+                        </button>
+                    </div> */}
                 </div>
             </aside>
         </>

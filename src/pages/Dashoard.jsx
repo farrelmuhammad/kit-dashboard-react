@@ -9,6 +9,7 @@ import { useState } from 'react';
 import QueryString from 'qs';
 import Chart from '../components/Backoffice/Chart';
 import PieChart from '../components/Backoffice/PieChart';
+import { FiTrendingDown, FiTrendingUp } from 'react-icons/fi';
 
 const columns = [
   {
@@ -104,19 +105,34 @@ const Dashoard = () => {
           </div>
           <div className="px-6 py-4">
             <div className="flex gap-3">
-              <div className="w-full bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg p-6 text-white flex flex-col">
-                <h2 className="text-lg font-semibold mb-2">Total Overtime</h2>
-                <p className="text-2xl font-bold self-end">8 hours</p>
+              <div className="w-full border border-spacing-1 p-6 text-black rounded-lg flex flex-col">
+                <h2 className="text-lg font-semibold mb-2">Open Opportunity</h2>
+                <div className="flex justify-between">
+                  <p className="text-2xl font-bold">
+                    <FiTrendingUp className='text-green-400' />
+                  </p>
+                  <p className="text-2xl font-bold">2</p>
+                </div>
               </div>
 
-              <div className="w-full bg-gradient-to-r from-green-500 to-green-600 rounded-lg p-6 text-white flex flex-col">
+              <div className="w-full border border-spacing-1 p-6 text-black rounded-lg flex flex-col">
                 <h2 className="text-lg font-semibold mb-2">Reimbursement Disetujui</h2>
-                <p className="text-2xl font-bold self-end">2</p>
+                <div className="flex justify-between">
+                  <p className="text-2xl font-bold">
+                    <FiTrendingDown className='text-red-400' />
+                  </p>
+                  <p className="text-2xl font-bold">2</p>
+                </div>
               </div>
 
-              <div className="w-full bg-gradient-to-r from-red-500 to-red-600 rounded-lg p-6 text-white flex flex-col">
+              <div className="w-full border border-spacing-1 p-6 text-black rounded-lg flex flex-col">
                 <h2 className="text-lg font-semibold mb-2">Reimbursement Ditolak</h2>
-                <p className="text-2xl font-bold self-end">2</p>
+                <div className="flex justify-between">
+                  <p className="text-2xl font-bold">
+                    <FiTrendingDown className='text-red-400' />
+                  </p>
+                  <p className="text-2xl font-bold">2</p>
+                </div>
               </div>
             </div>
 
