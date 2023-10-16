@@ -15,15 +15,11 @@ import { useMemo } from 'react';
 
 
 const buttonWidth = 50;
-const gap = 8;
 const btnProps = {
   style: {
     width: buttonWidth,
   },
 };
-
-
-
 
 const Dashoard = () => {
   const isLoggedIn = useSelector(state => state.auth.accessToken);
