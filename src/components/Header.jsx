@@ -59,9 +59,7 @@ const Header = ({ isLoggedIn }) => {
             <div className="relative flex h-16 items-center justify-between" ref={dropdownRef}>
                 <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                     <span
-                        className="flex flex-col text-gray-300 hover:underline rounded-md text-sm font-medium"
-                        aria-current="page"
-                    >
+                        className="flex flex-col text-gray-300 hover:underline rounded-md text-sm font-medium">
                         <span className="text-gray-800 text-2xl">{capitalizeEachWord(nameLocation[1])}</span>
                     </span>
                 </div>

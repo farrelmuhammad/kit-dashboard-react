@@ -99,7 +99,7 @@ const Dashoard = () => {
         </div>
 
         <div className="w-4/5">
-          <div className="px-6 py-4">
+          <div className="px-6 py-4 border-b border-gray-100">
             <Header isLoggedIn={isLoggedIn} />
           </div>
           <div className="px-6 py-4">
