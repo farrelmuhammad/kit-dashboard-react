@@ -187,7 +187,12 @@ const Dashoard = () => {
               </div>
             </div>
             <div className='w-full border border-spacing-1 p-2 rounded-lg my-4'>
-              <h2 className='text-gray-800 text-2xl font-semibold text-start px-2 py-1'>Tabel Karyawan</h2>
+              <div className="flex">
+                <h2 className='text-gray-800 text-2xl font-semibold text-start px-2 py-1'>Tabel Karyawan</h2>
+                <button type='button' className="flex justify-center items-center border border-indigo-300 px-2 py-1 text-indigo-400 font-normal text-sm leading-tight rounded-lg
+            focus:shadow-lg focus:outline-none active:shadow-lg disabled:opacity-70 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300"
+                >Tambah</button>
+              </div>
               <DataTable columns={columns} data={data} pagination={tableParams} loading={loading} onChange={handleTableChange} />
             </div>
           </div>
