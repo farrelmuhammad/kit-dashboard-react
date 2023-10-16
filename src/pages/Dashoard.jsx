@@ -149,7 +149,7 @@ const Dashoard = () => {
             <div className="flex gap-3">
               <div className="w-full border border-spacing-1 p-6 text-black rounded-lg flex flex-col">
                 <h2 className="text-lg font-semibold mb-2">Open Opportunity</h2>
-                <div className="flex justify-space-between gap-4">
+                <div className="flex justify-between">
                   <p className="text-2xl font-bold">
                     <FiTrendingUp className='text-green-400' />
                   </p>
