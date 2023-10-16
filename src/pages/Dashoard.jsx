@@ -9,45 +9,91 @@ import { useState } from 'react';
 import QueryString from 'qs';
 import Chart from '../components/Backoffice/Chart';
 import PieChart from '../components/Backoffice/PieChart';
-import { FiTrendingDown, FiTrendingUp } from 'react-icons/fi';
+import { FiEdit2, FiTrash2, FiTrendingDown, FiTrendingUp } from 'react-icons/fi';
+import { Button, Tooltip } from 'antd';
+import { useMemo } from 'react';
 
-const columns = [
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    sorter: true,
-    render: (name) => `${name.first} ${name.last}`,
-    width: '20%',
+
+const buttonWidth = 50;
+const gap = 8;
+const btnProps = {
+  style: {
+    width: buttonWidth,
   },
-  {
-    title: 'Gender',
-    dataIndex: 'gender',
-    filters: [
-      {
-        text: 'Male',
-        value: 'male',
-      },
-      {
-        text: 'Female',
-        value: 'female',
-      },
-    ],
-    width: '20%',
-  },
-  {
-    title: 'Email',
-    dataIndex: 'email',
-  },
-];
-const getRandomuserParams = (params) => ({
-  results: params.pagination?.pageSize,
-  page: params.pagination?.current,
-  ...params,
-});
+};
+
+
 
 
 const Dashoard = () => {
   const isLoggedIn = useSelector(state => state.auth.accessToken);
+
+  const options = ['Show', 'Hide', 'Center'];
+  const [arrow, setArrow] = useState('Show');
+  const mergedArrow = useMemo(() => {
+    if (arrow === 'Hide') {
+      return false;
+    }
+    if (arrow === 'Show') {
+      return true;
+    }
+    return {
+      pointAtCenter: true,
+    };
+  }, [arrow]);
+
+  const columns = [
+    {
+      title: 'Name',
+      dataIndex: 'name',
+      sorter: true,
+      render: (name) => `${name.first} ${name.last}`,
+      width: '20%',
+    },
+    {
+      title: 'Gender',
+      dataIndex: 'gender',
+      filters: [
+        {
+          text: 'Male',
+          value: 'male',
+        },
+        {
+          text: 'Female',
+          value: 'female',
+        },
+      ],
+      width: '20%',
+    },
+    {
+      title: 'Email',
+      dataIndex: 'email',
+    },
+    {
+      title: 'Action',
+      dataIndex: 'action',
+      render: () => (
+        <>
+          <div className='flex justify-space-between gap-1'>
+            <Tooltip placement="bottom" title={'Edit'} arrow={mergedArrow}>
+              <Button type="primary" ghost size='small' icon={<FiEdit2 />} {...btnProps}></Button>
+            </Tooltip>
+            {/* <Tooltip placement="bottom" title={text} arrow={mergedArrow}>
+              <Button size='small' {...btnProps}>Bottom</Button>
+            </Tooltip> */}
+            <Tooltip placement="bottom" title={"Delete"} arrow={mergedArrow}>
+              <Button type="primary" danger ghost size='small' icon={<FiTrash2 />} {...btnProps}></Button>
+            </Tooltip>
+          </div>
+        </>
+      )
+    },
+  ];
+  const getRandomuserParams = (params) => ({
+    results: params.pagination?.pageSize,
+    page: params.pagination?.current,
+    ...params,
+  });
 
   const [data, setData] = useState();
   const [loading, setLoading] = useState(false);
@@ -107,7 +153,7 @@ const Dashoard = () => {
             <div className="flex gap-3">
               <div className="w-full border border-spacing-1 p-6 text-black rounded-lg flex flex-col">
                 <h2 className="text-lg font-semibold mb-2">Open Opportunity</h2>
-                <div className="flex justify-between">
+                <div className="flex justify-space-between gap-4">
                   <p className="text-2xl font-bold">
                     <FiTrendingUp className='text-green-400' />
                   </p>
