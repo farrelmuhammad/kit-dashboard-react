@@ -8,6 +8,7 @@ import ModalNotifications from './modal/ModalNotifications';
 
 const Header = ({ isLoggedIn }) => {
     const userName = useSelector(state => state.auth.user);
+    const photoUser = useSelector(state => state.auth.photoUser);
     const notif = useSelector(state => state.notification.items);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -91,8 +92,15 @@ const Header = ({ isLoggedIn }) => {
                             onClick={() => handleDropdown('profile')}
                         >
                             <span className="">{capitalizeEachWord(userName)}</span>
-                            <img src="https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=871&q=80"
-                                className="h-12 w-12 rounded-full object-cover" alt="User Profile" />
+                            {photoUser ? (
+                                <img src={photoUser}
+                                    className="h-12 w-12 rounded-full object-cover" alt="User Profile" />
+                            ) : (
+                                <div className="w-10 h-10 rounded-full bg-gray-500 text-white flex items-center justify-center text-xl">
+                                    {userName.charAt(0).toUpperCase()}
+                                </div>
+                            )}
+
                             {openDropdown ? <FiChevronUp className='ml-auto' /> : <FiChevronDown className='ml-auto' />}
                         </span>
                         {openDropdown && (
@@ -124,8 +132,8 @@ const Header = ({ isLoggedIn }) => {
                                     Logout
                                 </button>
                             </div> */}
-                </div>
-            </div>
+                </div >
+            </div >
         </>
     )
 }

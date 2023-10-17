@@ -33,9 +33,10 @@ const Login = () => {
   const signInWithGoogle = async () => {
     try {
       const result = await signInWithPopup(auth, new GoogleAuthProvider());
-      // console.log(result.user);
+      // console.log(result.user, result);
       dispatch(setData({
         user: result.user.displayName,
+        photoUser: result.user.photoURL,
         accessToken: result.user.accessToken
       }));
 
@@ -126,7 +127,7 @@ const Login = () => {
             user: user.displayName,
             accessToken: user.accessToken
           }));
-          console.log(user)
+          console.log(user, userCredential)
           // dispatch(setData(
 
           // ))
