@@ -26,6 +26,8 @@ const Dashoard = () => {
 
   const options = ['Show', 'Hide', 'Center'];
   const [arrow, setArrow] = useState('Show');
+  const [toggle, setToggle] = useState(false);
+
   const mergedArrow = useMemo(() => {
     if (arrow === 'Hide') {
       return false;
@@ -134,11 +136,15 @@ const Dashoard = () => {
     }
   };
 
+  const toggleSidebar = () => {
+    setToggle(!toggle);
+  };
+
   return (
     <>
       <div className="flex h-screen">
-        <div className="w-1/5">
-          <Sidebar />
+        <div className={["w-1/5"]}>
+          <Sidebar onClick={toggleSidebar} onToggle={toggle} />
         </div>
 
         <div className="w-4/5">
@@ -149,31 +155,34 @@ const Dashoard = () => {
             <div className="flex gap-3">
               <div className="w-full border border-spacing-1 p-6 text-black rounded-lg flex flex-col">
                 <h2 className="text-lg font-semibold mb-2">Open Opportunity</h2>
-                <div className="flex justify-between">
-                  <p className="text-2xl font-bold">
+                <div className="flex items-start justify-between">
+                  <span className="text-lg italic text-black font-bold flex items-center gap-1 underline p-1">
                     <FiTrendingUp className='text-green-400' />
-                  </p>
-                  <p className="text-2xl font-bold">2</p>
+                    +2%
+                  </span>
+                  <p className="text-2xl font-bold italic">Rp4.500.000</p>
                 </div>
               </div>
 
               <div className="w-full border border-spacing-1 p-6 text-black rounded-lg flex flex-col">
                 <h2 className="text-lg font-semibold mb-2">Reimbursement Disetujui</h2>
                 <div className="flex justify-between">
-                  <p className="text-2xl font-bold">
+                  <span className="text-lg italic text-black font-bold flex items-center gap-1 underline p-1">
                     <FiTrendingDown className='text-red-400' />
-                  </p>
-                  <p className="text-2xl font-bold">2</p>
+                    -2%
+                  </span>
+                  <p className="text-2xl font-bold italic">Rp2.500.000</p>
                 </div>
               </div>
 
               <div className="w-full border border-spacing-1 p-6 text-black rounded-lg flex flex-col">
                 <h2 className="text-lg font-semibold mb-2">Reimbursement Ditolak</h2>
                 <div className="flex justify-between">
-                  <p className="text-2xl font-bold">
+                  <span className="text-lg italic text-black font-bold flex items-center gap-1 underline p-1">
                     <FiTrendingDown className='text-red-400' />
-                  </p>
-                  <p className="text-2xl font-bold">2</p>
+                    -2%
+                  </span>
+                  <p className="text-2xl font-bold italic">Rp2.500.000</p>
                 </div>
               </div>
             </div>

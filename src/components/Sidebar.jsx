@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { FiBarChart, FiChevronDown, FiChevronUp, FiCreditCard, FiDollarSign, FiHome, FiMenu, FiServer, FiSettings } from 'react-icons/fi';
+import { FiBarChart, FiChevronDown, FiChevronUp, FiChevronsLeft, FiCreditCard, FiDollarSign, FiHome, FiMenu, FiServer, FiSettings } from 'react-icons/fi';
 import { Link } from 'react-router-dom'
 
-const Sidebar = () => {
+const Sidebar = ({ onClick, onToggle }) => {
     const menu = {
         menus: {
             home: {
@@ -72,14 +72,8 @@ const Sidebar = () => {
         }
     };
 
-    const [toggle, setToggle] = useState(false);
     const [openDropdown, setOpenDropdown] = useState(null);
     const [activeMenu, setActiveMenu] = useState("home");
-
-    const toggleSidebar = () => {
-        console.log("Toggling toggle");
-        setToggle(!toggle);
-    };
 
     const handleDropdown = (key) => {
         if (openDropdown === key) {
@@ -89,9 +83,11 @@ const Sidebar = () => {
         }
     };
 
+    console.log(onToggle)
+
     return (
         <>
-            <aside class="fixed top-0 left-0 w-1/5 h-full">
+            <aside className={["fixed top-0 left-0 w-1/5 h-full"]}>
                 <div className="overflow-y-auto py-4 px-3 shadow-lg shadow-gray-100/50 rounded-lg h-screen">
                     <div className="flex justify-center py-2 h-1/5">
                         <Link to="/">
@@ -174,11 +170,15 @@ const Sidebar = () => {
                             </li>
                         ))}
                     </ul>
-                    {/* <div className="flex justify-center mt-auto">
-                        <button className='p-2 m-2'>
-                            <FiMenu />
+                    <div className="flex justify-center mt-auto">
+                        <button
+                            type='button'
+                            onClick={onClick}
+                            className='p-2 m-2'
+                        >
+                            <FiChevronsLeft />
                         </button>
-                    </div> */}
+                    </div>
                 </div>
             </aside>
         </>
